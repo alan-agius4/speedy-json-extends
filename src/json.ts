@@ -4,20 +4,20 @@ import * as fs from "fs";
 export namespace json {
 
 	/**
-	 * Retrieve a JSON file. Supports `extends` with one or many existing JSON files.
+	 * Retrieve a JSON file asynchronous. Supports `extends` with one or many existing JSON files.
 	 *
 	 * @template T
 	 * @param {string} filePath path to a JSON file.
-	 * @param {{ [id: string]: string }} [namedExtends] A key value pair of maps for JSON files.
+	 * @param {{ [id: string]: string }} [namedExtends] A key value pair of named extends paths.
 	 *
 	 * @example
 	 * import { json } from "@speedy/json-extends";
 	 *
-	 * const maps = {
+	 * const named = {
 	 * 	"@speedy/commit-msg-hook:latest": "./node_modules/config/config.json"
 	 * };
 	 *
-	 * json.read("local-config.json", maps)
+	 * json.read("local-config.json", named)
 	 * 	.then(content => {
 	 * 		// json content
 	 * 	});
@@ -29,20 +29,20 @@ export namespace json {
 	}
 
 	/**
-	 * Retrieve a JSON file Synchronously. Supports `extends` with one or many existing JSON files.
+	 * Retrieve a JSON file synchronously. Supports `extends` with one or many existing JSON files.
 	 *
 	 * @template T
 	 * @param {string} filePath path to a JSON file.
-	 * @param {{ [id: string]: string }} [namedExtends] A key value pair of maps for JSON files.
+	 * @param {{ [id: string]: string }} [namedExtends] A key value pair of named extends paths.
 	 *
 	 * @example
 	 * import { json } from "@speedy/json-extends";
 	 *
-	 * const maps = {
+	 * const named = {
 	 * 	"@speedy/commit-msg-hook:latest": "./node_modules/config/config.json"
 	 * };
 	 *
-	 * const content = json.readSync("local-config.json", maps);
+	 * const content = json.readSync("local-config.json", named);
 	 *
 	 * @returns {T}
 	 */

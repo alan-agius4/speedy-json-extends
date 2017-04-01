@@ -28,11 +28,11 @@ TypeScript
 ```ts
 import { json } from "@speedy/json-extends";
 
-const maps = {
+const named = {
   "@speedy/commit-msg-hook:latest": "./node_modules/config/config.json"
 };
 
-json.read("local-config.json", maps)
+json.read("local-config.json", named)
   .then(content => {
     // json content
   });
@@ -58,9 +58,9 @@ TypeScript
 ```ts
 import { json } from "@speedy/json-extends";
 
-const maps = {
+const named = {
   "@speedy/commit-msg-hook:latest": "./node_modules/config/config.json"
 };
 
-const content = json.readSync("local-config.json", maps);
+const content = json.readSync("local-config.json", named);
 ```
