@@ -47,12 +47,13 @@ export namespace json {
 	 * @returns {T}
 	 */
 	export function readSync<T>(filePath: string, namedExtends?: { [id: string]: string }): T {
-		let content = JSON.parse(fs.readFileSync(filePath, "utf-8")) as T & { extends?: string | string[] };
+		const content = JSON.parse(fs.readFileSync(filePath, "utf-8")) as T & { extends?: string | string[] };
 
 		if (_.isEmpty(content.extends)) {
 			return content;
 		}
 
+		const contentUnmerged: T[] = [];
 		for (let path of _.castArray<string>(content.extends)) {
 			if (namedExtends) {
 				const extendsValue = namedExtends[path];
@@ -62,9 +63,9 @@ export namespace json {
 				}
 			}
 
-			content = _.merge({}, readSync(path, namedExtends), content);
+			contentUnmerged.push(readSync<T>(path, namedExtends));
 		}
 
-		return content;
+		return _.merge<T>({}, ...contentUnmerged, content);
 	}
 }
