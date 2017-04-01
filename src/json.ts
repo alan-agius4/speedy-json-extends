@@ -57,14 +57,14 @@ export namespace json {
 
 		for (let path of configExtends) {
 			if (namedExtends) {
-				const extendsKey = namedExtends[path];
+				const extendsValue = namedExtends[path];
 
-				if (extendsKey) {
-					path = extendsKey;
+				if (extendsValue) {
+					path = extendsValue;
 				}
 			}
 
-			content = _.merge({}, read(path, namedExtends), content);
+			content = _.merge({}, readSync(path, namedExtends), content);
 		}
 
 		return content;
