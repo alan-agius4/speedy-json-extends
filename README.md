@@ -41,6 +41,7 @@ json.read("local-config.json", maps)
   });
 ```
 
+JSON file
 ```json
 {
   "@extends": [
