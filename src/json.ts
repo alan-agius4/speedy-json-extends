@@ -53,9 +53,7 @@ export namespace json {
 			return content;
 		}
 
-		const configExtends = _.castArray<string>(content.extends);
-
-		for (let path of configExtends) {
+		for (let path of _.castArray<string>(content.extends)) {
 			if (namedExtends) {
 				const extendsValue = namedExtends[path];
 
