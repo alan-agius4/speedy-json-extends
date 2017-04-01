@@ -40,7 +40,6 @@ export namespace json {
 				if (extendsKey) {
 					path = extendsKey;
 				}
-				console.log(path);
 			}
 
 			content = _.merge({}, await read(path, extendsMap), content);
