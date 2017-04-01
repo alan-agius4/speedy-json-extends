@@ -20,8 +20,6 @@ Retrieve a JSON file. Supports `extends` with one or many existing JSON files.
 
 Extends supports also aliased paths, as shown in the example.
 
-**Template**: T  
-
 | Param      | Type                      | Required | Description                              |
 |------------|---------------------------|----------|------------------------------------------|
 | filePath   | `string`                  | true     | path to a JSON file.                     |
@@ -46,7 +44,7 @@ JSON file
 {
   "@extends": [
     "@speedy/commit-msg-hook:latest",
-    "./local/cofig.json"
+    "./local/config.json"
   ],
   "rules": {
     "no-dash": true
