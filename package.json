@@ -1,6 +1,6 @@
 {
   "name": "@speedy/json-extends",
-  "version": "1.0.2",
+  "version": "1.1.0",
   "description": "Extend a JSON file with one or many existing files.",
   "main": "./dist/json.js",
   "repository": {
