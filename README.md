@@ -14,18 +14,17 @@ npm install @speedy/json-extends --save
 
 
 ### Usage
-
-#### read(filePath, extendsMap) ⇒ <code>Promise.&lt;T&gt;</code>
+#### json.read(filePath, [namedExtends]) ⇒ `Promise<T>`
 Retrieve a JSON file. Supports `extends` with one or many existing JSON files.
 
-Extends supports also aliased paths, as shown in the example.
+Extends supports also Named Extends paths, as shown in the example.
 
-| Param      | Type                      | Required | Description                              |
-|------------|---------------------------|----------|------------------------------------------|
-| filePath   | `string`                  | true     | path to a JSON file.                     |
-| extendsMap | `{[id: string]: string }` | false    | A key value pair of maps for JSON files. |
+| Param        | Type                      | Required | Description                              |
+|--------------|---------------------------|----------|------------------------------------------|
+| filePath     | `string`                  | true     | path to a JSON file.                     |
+| namedExtends | `{[id: string]: string }` | false    | A key value pair of named extends paths  |
 
-
+TypeScript
 ```ts
 import { json } from "@speedy/json-extends";
 
@@ -50,4 +49,18 @@ JSON file
     "no-dash": true
   }
 }
+```
+
+#### json.readSync(filePath, [namedExtends]) ⇒ `T`
+Synchronous version of `json.read()`.
+
+TypeScript
+```ts
+import { json } from "@speedy/json-extends";
+
+const maps = {
+  "@speedy/commit-msg-hook:latest": "./node_modules/config/config.json"
+};
+
+const content = json.readSync("local-config.json", maps);
 ```
