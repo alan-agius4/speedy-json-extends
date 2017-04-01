@@ -42,7 +42,7 @@ json.read("local-config.json", maps)
 JSON file
 ```json
 {
-  "@extends": [
+  "extends": [
     "@speedy/commit-msg-hook:latest",
     "./local/config.json"
   ],
