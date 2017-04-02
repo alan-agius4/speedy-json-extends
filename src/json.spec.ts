@@ -84,41 +84,49 @@ describe("jsonSpec", () => {
 			mockFs.restore();
 		});
 
-		it("should merge values of extended files ordered by per position in array", async done => {
-			const result = await json.read<any>("multiple-extends.json");
-			expect(result.rules.message.minLength).toBe(40);
-			expect(result.rules.message.noWhiteSpace).toBe(true);
-			done();
-		});
-
-		it("should merge object with named extends", async done => {
-			const result = await json.read<any>("speedy-commit-msg-hook-alias.json", {
-				"primary-extend": "./config/primary-extend.json"
+		describe("given it has extends", () => {
+			describe("and have named extends", () => {
+				it("should resolve them and merge values", async done => {
+					const result = await json.read<any>("speedy-commit-msg-hook-alias.json", {
+						"primary-extend": "./config/primary-extend.json"
+					});
+					expect(result.rules.message.maxLength).toBe(100);
+					expect(result.rules.message.noDashes).toBe(true);
+					done();
+				});
 			});
-			expect(result.rules.message.maxLength).toBe(100);
-			expect(result.rules.message.noDashes).toBe(true);
-			done();
-		});
 
-		it("should merge object of extended file", async done => {
-			const result = await json.read<any>("speedy-commit-msg-hook.json");
-			expect(result.rules.message.maxLength).toBe(100);
-			expect(result.rules.message.noDashes).toBe(true);
-			done();
-		});
+			describe("and have multiple same level extends", () => {
+				it("should merge extended files last superseeds previous values", async done => {
+					const result = await json.read<any>("multiple-extends.json");
+					expect(result.rules.message.minLength).toBe(40);
+					expect(result.rules.message.noWhiteSpace).toBe(true);
+					done();
+				});
+			});
 
-		it("should override same properties", async done => {
-			const result = await json.read<any>("speedy-commit-msg-hook.json");
-			expect(result.rules.message.minLength).toBe(2);
-			done();
-		});
+			describe("and have nested extends", () => {
+				it("should merge properties of nested json", async done => {
+					const result = await json.read<any>("speedy-commit-msg-hook.json");
+					expect(result.rules.message.noDashes).toBe(true);
+					expect(result.rules.message.minLength).toBe(2);
+					expect(result.rules.message.noWhiteSpace).toBe(true);
+					done();
+				});
 
-		it("should merge properties of nested extended file", async done => {
-			const result = await json.read<any>("speedy-commit-msg-hook.json");
-			expect(result.rules.message.noDashes).toBe(true);
-			expect(result.rules.message.minLength).toBe(2);
-			expect(result.rules.message.noWhiteSpace).toBe(true);
-			done();
+				it("should merge json objects", async done => {
+					const result = await json.read<any>("speedy-commit-msg-hook.json");
+					expect(result.rules.message.maxLength).toBe(100);
+					expect(result.rules.message.noDashes).toBe(true);
+					done();
+				});
+
+				it("should override same properties", async done => {
+					const result = await json.read<any>("speedy-commit-msg-hook.json");
+					expect(result.rules.message.minLength).toBe(2);
+					done();
+				});
+			});
 		});
 	});
 });
