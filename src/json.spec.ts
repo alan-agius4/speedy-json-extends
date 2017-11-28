@@ -29,7 +29,7 @@ describe("jsonSpec", () => {
 		};
 
 		const PRIMARY_EXTEND_FILE = {
-			extends: "./config/secondary-extend.json",
+			extends: "./secondary-extend.json",
 			rules: {
 				message: {
 					minLength: 1,
@@ -105,7 +105,7 @@ describe("jsonSpec", () => {
 				});
 			});
 
-			describe("and have nested extends", () => {
+			fdescribe("and have nested extends", () => {
 				it("should merge properties of nested json", async done => {
 					const result = await json.read<any>("speedy-commit-msg-hook.json");
 					expect(result.rules.message.noDashes).toBe(true);
