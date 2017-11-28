@@ -1,5 +1,6 @@
 import * as _ from "lodash";
 import * as fs from "fs";
+import { resolve, dirname } from "path";
 
 export namespace json {
 
@@ -63,9 +64,9 @@ export namespace json {
 				}
 			}
 
-			contentUnmerged.push(readSync<T>(path, namedExtends));
+			contentUnmerged.push(readSync<T>(resolve(dirname(filePath), path), namedExtends));
 		}
 
-		return _.merge<T>({}, ...contentUnmerged, content);
+		return _.merge({}, ...contentUnmerged, content);
 	}
 }
