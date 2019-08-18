@@ -44,7 +44,7 @@
     "conventional-changelog-cli": "^2.0.0",
     "jasmine": "^3.0.0",
     "mock-fs": "^4.1.0",
-    "rimraf": "^2.6.0",
+    "rimraf": "^3.0.0",
     "tslint": "^5.0.0",
     "typescript": "^2.2.1"
   },
